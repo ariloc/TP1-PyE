@@ -242,7 +242,8 @@ datos_desalojo_renabap <- datos_limpios %>%
 attach(datos_desalojo_renabap)
 datos_desalojo_renabap %>% 
   ggplot() + 
-  aes(x = renabap, fill = intento_desalojo) +
+  aes(renabap, fill = intento_desalojo) +
+  geom_bar(position="dodge", colour="black") +
   labs(x = "Tiene RENABAP", 
        y = "Porcentaje intento desalojo", 
        fill = "Intento desalojo") +
