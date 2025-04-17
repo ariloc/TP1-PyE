@@ -28,11 +28,12 @@ for(i in 2:(dim(encuestas_limpias)[1])) {
   }
 }                                             # Completar filas con NA por celdas combinadas
 
+encuestas_limpias$barrio[encuestas_limpias$barrio %in% "Las Quintas"] <- "Las Quintas, Santa Teresita" # Hay dos Las Quintas en Buenos Aires, especificando según mapa
 encuestas_limpias <- encuestas_limpias %>% 
   group_by(provincia,barrio) %>% 
   summarise(encuestas = sum(encuestas), .groups='drop') %>%             # Sumar múltiples encuestas por barrio
-  mutate(provincia = recode(provincia, "BsAs" = "Buenos Aires")) %>%    # Renombrar Buenos Aires para que sea reconocido por el geocoding
-  mutate(ubicacion = paste(barrio, provincia, "Argentina", sep=", "))   # Formatear ubicaciones con formato "Barrio, Provincia" para geocoding
+  mutate(provincia = recode(provincia, "BsAs" = "Provincia de Buenos Aires")) %>%    # Renombrar Buenos Aires para que sea reconocido por el geocoding
+  mutate(ubicacion = paste("Barrio", paste(barrio, provincia, "Argentina", sep=", ")))   # Formatear ubicaciones con formato "Barrio [barrio], [provincia]" para geocoding
 
 encuestas_coords <- encuestas_limpias %>%                               # Geocoding -> obtener coords de los barrios
   geocode(
@@ -92,3 +93,4 @@ p1 + geom_point() +
   ) + 
   annotate("rect", xmin = -53, xmax = -57, ymin = -34.25, ymax = -30.75,    # Rectángulo con borde rayado al fragmento con zoom a CABA
            color = "black", fill = NA, linetype = "dashed")
+
