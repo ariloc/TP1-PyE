@@ -1,6 +1,8 @@
 library(here)
 source(here("datos","leer-datos-lp.R"))
 
+library(tidyverse)
+
 #Costo promedio del alquiler en los barrios populares:
 datos_alquiler <- datos %>%
   filter(!is.na(costo_alquiler)) %>%
@@ -14,13 +16,11 @@ print(max_alquiler)
 
 
 #Calculamos el nro de intervalos (√n)
-n <- nrow(datos_alquiler)
-rango <-max_alquiler - min_alquiler
-binwidth <- rango / sqrt(n)
+bins = ceiling(sqrt(n))
 
 #Gráfico
 ggplot(datos_alquiler, aes(x = costo_alquiler)) +
-  geom_histogram(binwidth = binwidth, fill = "indianred2", color = "black") +
+  geom_histogram(bins = bins, fill = "indianred2", color = "black") +
   labs(
     title = "Frecuencia del costo del alquiler en barrios populares",
     x = "Costo del alquiler en pesos",
