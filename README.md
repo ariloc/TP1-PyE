@@ -8,7 +8,7 @@ Integrantes del grupo:
 * []
 
 > [!IMPORTANT]
-> Se requieren las librerías `ggrepel` y `here` para correr el proyecto.
+> Además de `tidyverse`, se requieren las librerías `ggrepel` y `here` para correr el proyecto.
 > 
 > `here` es utilizado para facilitar el manejo de rutas en el proyecto, con el
 > fin de separar los archivos en una estructura más fácil de manejar y leer.
@@ -16,8 +16,8 @@ Integrantes del grupo:
 > `ggrepel`, por otro lado, es utilizado para dibujar etiquetas de texto en gráficas
 > que eviten taparse con otras.
 >
-> Además, en particular para el mapa en la carpeta _reporte_ deben instalarse algunos
-> paquetes adicionales, indicados con `library()` al comienzo del script.
+> Además, para el mapa ubicado en la carpeta _reporte_ deben instalarse algunos
+> paquetes adicionales a los mencionados, indicados con `library()` al comienzo del script.
 
 > [!WARNING]
 > En algún gráfico podría aparecer el error de tipo:
