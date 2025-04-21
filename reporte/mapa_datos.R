@@ -6,10 +6,9 @@ library(ggforce)
 library(rnaturalearth)
 library(rnaturalearthhires)
 library(cowplot)
+library(here)
 
-setwd("/home/ariel/GitHub/TP1-PyE/datos")
-
-datos <- readxl::read_excel("Barrios_Usuarios.xlsx", 
+datos <- readxl::read_excel(here("datos","Barrios_Usuarios.xlsx"), 
                                 col_names = FALSE, 
                                 skip = 1)
 

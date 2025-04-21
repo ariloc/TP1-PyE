@@ -1,12 +1,10 @@
-setwd("/home/ariel/GitHub/TP1-PyE/datos")
-
 library(readxl)
 library(ggrepel)
-library(ggplot2)
 library(tidyverse)
+library(here)
 
-datos_renabap <- read.csv("renabap-datos-barrios-csv.csv")
-datos_encuestas <- readxl::read_excel("Barrios_Usuarios.xlsx", col_names = FALSE, skip = 1)
+datos_renabap <- read.csv(here("datos", "renabap-datos-barrios-csv.csv"))
+datos_encuestas <- readxl::read_excel(here("datos", "Barrios_Usuarios.xlsx"), col_names = FALSE, skip = 1)
 
 attach(datos_encuestas)
 colnames(datos_encuestas) <- c("region","provincia","barrio","encuestas")
@@ -81,9 +79,12 @@ donut_renabap <- barrios_encuestas_renabap %>%
                            labels = c("Sí","No"))) %>%
   group_by(renabap) %>%
   summarize(cant = n()) %>%
-  mutate(csum=rev(cumsum(rev(porcentaje))),
-         pos=porcentaje/2+lead(csum,1),
-         pos=if_else(is.na(pos),porcentaje/2,pos))
+  mutate(
+    porcentaje = round(cant / sum(cant) * 100, 1),
+    csum=rev(cumsum(rev(porcentaje))),
+    pos=porcentaje/2+lead(csum,1),
+    pos=if_else(is.na(pos),porcentaje/2,pos)
+  )
 
 ggplot(donut_renabap) +
   aes(x = 3 , y = porcentaje, fill = renabap) +
@@ -113,3 +114,4 @@ ggplot(donut_renabap) +
     legend.spacing = unit(0.25, "cm"),
     legend.margin = margin(10, 10, 10, 10),
   )
+
