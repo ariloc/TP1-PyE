@@ -3,9 +3,9 @@
 Repositorio del Trabajo Práctico N°1 de Probabilidad y Estadística, 2025 1° cuatrimestre, LCC (FCEIA - UNR).
 
 Integrantes del grupo:
-* []
-* []
-* []
+* Emilia Moloeznik
+* Antonella Grassi
+* Ariel Fideleff
 
 > [!IMPORTANT]
 > Además de `tidyverse`, se requieren las librerías `ggrepel` y `here` para correr el proyecto.
