@@ -6,31 +6,33 @@ library(tidyverse)
 # Analizamos la frecuencia de la cantidad de personas por habitación, dividiendo la muestra
 # en 2 categorías: "tenencia propia" y "tenencia no propia".
 
+#Factorizamos los datos, según criterio dado.
 datos_refactorizados<- datos %>%
   mutate(propiedad_reclasificada=case_when(propiedad %in% c("Propio con algún comprobante de tenencia","Propio sin títulos")~"Propia",
                                            TRUE ~ "No propia"))
+
+#Factorizamos datos para la tenencia no propia
 datos_no_propios <- datos_refactorizados %>% 
   filter(propiedad_reclasificada == "No propia")
 
-# Gráfico
+# Gráfico vivienda no propia
 ggplot(datos_no_propios, aes(x = personas_dormitorio)) +
   geom_histogram(binwidth = 0.5, fill = "salmon", color = "black") +
   labs(title = "Personas por habitación (Tenencia no propia)",
        x = "Cantidad de personas por habitación",
-       y = "Frecuencia",
-       tag="Gráfico 3.") +
+       y = "Frecuencia") +
   theme_minimal()
 
+#Factorizamos datos para la tenencia propia
 datos_propios <- datos_refactorizados %>% 
   filter(propiedad_reclasificada == "Propia")
 
-# Gráfico
+# Gráfico vivienda propia
 ggplot(datos_propios, aes(x = personas_dormitorio)) +
   geom_histogram(binwidth = 0.5, fill = "#00E5EE", color = "black") +
   labs(title = "Personas por habitación (Tenencia propia)",
        x = "Cantidad de personas por habitación",
-       y = "Frecuencia",
-       tag="Gráfico 4.") +
+       y = "Frecuencia") +
   theme_minimal()
 
 #Podemos visualizar cierta tendencia en los No propios, analicemos
