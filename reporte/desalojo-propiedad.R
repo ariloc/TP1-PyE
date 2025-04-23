@@ -27,8 +27,19 @@ datos_desalojo_propiedad %>%
   labs(x = "Condición de propiedad", 
        y = "Porcentaje", 
        fill = "Tuvo al menos un intento de desalojo",
-       title = "Distribución de viviendas con al menos un intento de desalojo,\nsegún condición de propiedad"
+       title = "Distribución de viviendas con al menos un intento de desalojo\nsegún condición de propiedad en los barrios relevados",
+       caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa"
   ) +
   geom_text(aes(y = datos_desalojo_propiedad$porcentaje / 2, label = paste0(datos_desalojo_propiedad$porcentaje, "%"),), position = position_dodge(width = 0.9), size = 4.5) + 
-  theme_classic() 
+  theme_classic() +
+  theme(
+    plot.tag.position = "bottom",
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5,vjust=-2), 
+    plot.caption = element_text(size=8, hjust=0),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    
+    legend.background = element_rect(color = "black", linewidth  = 0.5), 
+    legend.spacing = unit(0.5, "cm"),
+    legend.margin = margin(10, 10, 10, 10)
+  )
 

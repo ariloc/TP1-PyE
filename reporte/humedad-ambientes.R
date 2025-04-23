@@ -36,11 +36,11 @@ datos_humedad_largo<-datos_humedad_largo %>%
 ggplot(datos_humedad_largo, aes(x = ambiente, fill = hay_humedad)) +
   geom_bar(position = "fill") +
   labs(
-    title = "Distribución de problemas de humedad por ambiente",
+    title = "Distribución de problemas de humedad por ambiente declarados en los barrios relevados",
     x = "Ambiente de la vivienda",
-    y = "Proporción de viviendas con humedad",
-    fill="¿Hay humedad?",
-    tag="Gráfico 6.",
+    y = "Porcentaje de viviendas con humedad",
+    fill="Presencia de humedad",
+    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa",
   ) +
   scale_y_continuous(labels = scales::percent_format()) +
   scale_fill_manual(
@@ -53,6 +53,16 @@ ggplot(datos_humedad_largo, aes(x = ambiente, fill = hay_humedad)) +
     position = position_fill(vjust = 0.5),
     size = 3
   )+
-  theme_minimal()
+  theme_classic() +
+  theme(
+    plot.tag.position = "bottom",
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5,vjust=-2), 
+    plot.caption = element_text(size=8, hjust=0),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    
+    legend.background = element_rect(color = "black", linewidth  = 0.5),
+    legend.spacing = unit(0.5, "cm"), 
+    legend.margin = margin(10, 10, 10, 10)
+  )
 
 

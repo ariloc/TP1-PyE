@@ -19,14 +19,26 @@ ggplot(datos_limpios) +
            col = "black",  # Color de línea
            alpha = 0.6) +  # Transparencia
   
-  labs(x = "Tipo de presión de agua", y = "Porcentaje de hogares") + # Nombres de ejes
+  labs(
+    title = "Distribución de la calidad de presión de agua declarada en los barrios relevados",
+    x = "Calidad de presión del agua", 
+    y = "Porcentaje de viviendas",
+    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa",
+  ) + # Nombres de ejes
   
-  ggtitle("Presión de agua en hogares relevados\nen barrios populares por La Poderosa - Año 2023") +
+  coord_flip() +
   
-  coord_flip() + # Barras horizontales o verticales
-  
-  theme_classic() +# Temas preconfigurados de R https://r-charts.com/ggplot2/themes/
-  theme(plot.title = element_text(size = 12))
+  theme_classic() +
+  theme(
+    plot.tag.position = "bottom",
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5,vjust=-2), 
+    plot.caption = element_text(size=8, hjust=0),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    
+    legend.background = element_rect(color = "black", linewidth  = 0.5),
+    legend.spacing = unit(0.5, "cm"), 
+    legend.margin = margin(10, 10, 10, 10)
+  )
 
 # mediana
 mediana_num <- median(as.numeric(datos_limpios$presion_agua))

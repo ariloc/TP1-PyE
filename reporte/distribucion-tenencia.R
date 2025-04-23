@@ -35,14 +35,16 @@ ggplot(datos_grafico_tenencia, aes(x = 3 , y = valor, fill = fct_inorder(grupo))
     show.legend = FALSE) + 
   guides(fill = guide_legend(title = "Tipo de tenencia de la vivienda")) + #Leyenda
   labs(  #Título y nota
-    title = "Distribución de los hogares según tipo de tenencia de la vivienda\nDatos de barrios populares de Argentina encuestados, 2022.",
-    caption="NOTA: Los datos de vivienda propia con comprobante de propiedad y sin título se han agrupado en vivienda propia \n Los datos de vivienda alquilada, prestada, ocupada u otro se han agrupado en vivienda no propia",
+    title = "Distribución de los hogares según tipo de tenencia de la vivienda\nen los barrios relevados",
+    # caption="NOTA: Los datos de vivienda propia con comprobante de propiedad y sin título se han agrupado en vivienda propia \n Los datos de vivienda alquilada, prestada, ocupada u otro se han agrupado en vivienda no propia",
+    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa"
   ) +
   #Estilo del gráfico
   theme_void()+
   theme(
-    plot.title = element_text(size = 12, face = "bold", hjust = 0.5,vjust=-2),
-    plot.caption=element_text(size=8,face="italic",hjust=0.5,vjust=5),
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5, vjust=-2),
+    plot.caption = element_text(size=8, hjust=0),
+    plot.margin = margin(0,0,15,0),
     
     legend.background = element_rect(color = "black", linewidth  = 0.5),  # Borde de fondo de la leyenda
     legend.spacing = unit(0.5, "cm"),  # Espacio entre los elementos de la leyenda
