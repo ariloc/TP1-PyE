@@ -3,16 +3,14 @@ source(here("datos","leer-datos-lp.R"))
 
 library(tidyverse)
 
-#Costo promedio del alquiler en los barrios populares:
+#Datos del alquiler en los barrios populares , con la cantidad de cada uno:
 datos_alquiler <- datos %>%
   filter(!is.na(costo_alquiler)) %>%
   count(costo_alquiler)
 
 #Calculemos el mínimo y máximo:
 min_alquiler <- min(datos$costo_alquiler, na.rm = TRUE)
-print(min_alquiler)
 max_alquiler <- max(datos$costo_alquiler, na.rm = TRUE)
-print(max_alquiler)
 
 
 #Calculamos el nro de intervalos (√n)
@@ -39,8 +37,6 @@ attach(datos)
 
 #Calculamos la media aritmética del coste del alquiler:
 media_alquiler <- mean(datos$costo_alquiler, na.rm = TRUE)
-print(media_alquiler)
-#mediana_alquiler<-median(datos$costo_alquiler, na.rm = TRUE)
 
 #Calculamos el desvío estándar:
 desvio_estandar_alquiler<-sd(datos$costo_alquiler,na.rm=TRUE)
