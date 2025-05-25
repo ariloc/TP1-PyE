@@ -20,7 +20,7 @@ datos_propios <- datos_refactorizados %>%
 
 # Gráfico de  viviendas no propias
 ggplot(datos_no_propios, aes(x = as.factor(personas_dormitorio))) +
-  geom_bar(fill = "salmon", color = "black") +
+  geom_bar(fill = "salmon", color = "black",width=0.2) +
   labs(
     title = "Cantidad de personas por habitación, en viviendas sin tenencia propia",
     x = "Cantidad de personas por habitación",
@@ -35,7 +35,7 @@ ggplot(datos_no_propios, aes(x = as.factor(personas_dormitorio))) +
 
 # Gráfico de viviendas propias
 ggplot(datos_propios, aes(x = as.factor(personas_dormitorio))) +
-  geom_bar(fill = "#00E5EE", color = "black") +
+  geom_bar(fill = "#00E5EE", color = "black",width=0.2) +
   labs(
     title = "Cantidad de personas por habitación, en viviendas con tenencia propia",
     x = "Cantidad de personas por habitación",
