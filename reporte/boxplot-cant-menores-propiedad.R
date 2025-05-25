@@ -9,18 +9,18 @@ datos_limpios <- datos %>%
                        TRUE ~ "No propia"),
   )
 
-datos_jefe_propiedad <- datos_limpios %>%
+datos_menores_tenencia <- datos_limpios %>%
   select(
-    edad_jefe_hogar, propio
+    menores_edad, propio
   )
 
-ggplot(datos_jefe_propiedad) +
-  aes(x = propio, y = edad_jefe_hogar, fill=propio) +
+ggplot(datos_menores_tenencia) +
+  aes(x = propio, y = menores_edad, fill=propio) +
   geom_boxplot(show.legend = F) +
   labs(
     x = "Condición de propiedad", 
-    y = "Edad del jefe del hogar",
-    title = "Distribución de la edad del jefe del hogar según condición de propiedad en los barrios relevados",
+    y = "Cantidad de menores en el hogar",
+    title = "Distribución de cantidad de menores en la vivienda según condición de propiedad\nen los barrios relevados",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
   scale_fill_brewer(palette = "Pastel1") +
