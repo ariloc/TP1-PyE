@@ -32,37 +32,72 @@ datos_humedad_largo <- datos_humedad_expandido %>%
 datos_humedad_largo<-datos_humedad_largo %>%
   mutate(hay_humedad=factor(hay_humedad,levels=c(TRUE,FALSE)))
 
+#Calculamos porcentajes  - agrupamos datos.
+datos_humedad_resumen <- datos_humedad_largo %>%
+  group_by(ambiente, hay_humedad) %>%
+  summarize(cant = n(), .groups = "drop_last") %>%
+  mutate(
+    porcentaje = round(cant / sum(cant) * 100, 1)
+  )
+
 # Gráfico
-ggplot(datos_humedad_largo, aes(x = ambiente, fill = hay_humedad)) +
-  geom_bar(position = "fill") +
-  labs(
-    title = "Distribución de problemas de humedad por ambiente declarados en los barrios relevados",
-    x = "Ambiente de la vivienda",
-    y = "Porcentaje de viviendas con humedad",
-    fill="Presencia de humedad",
-    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa",
-  ) +
-  scale_y_continuous(labels = scales::percent_format()) +
+ggplot(datos_humedad_resumen) +
+  aes(x = ambiente, y = porcentaje, fill = hay_humedad) +
+  geom_bar(position = "dodge", stat = "identity", colour = "black") +
   scale_fill_manual(
-    values = c("TRUE" = "#63B8FF", "FALSE" = "#CD96CD"), # Cambia los colores
-    labels = c("Sí", "No") # Cambia el texto de la leyenda
-  )+
+    values = c("TRUE" = "#63B8FF", "FALSE" = "#CD96CD"),
+    labels = c("Sí", "No")
+  ) +
+  labs(
+    x = "Ambiente de la vivienda",
+    y = "Porcentaje de humedad",
+    fill = "Presencia de humedad",
+    title = "Distribución de problemas de humedad por ambiente\nsegún declaración en los barrios relevados",
+    caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
+  ) +
   geom_text(
-    stat = "count",
-    aes(label = scales::percent(..count../tapply(..count.., ..x.., sum)[..x..], accuracy = 1)), #porcentajes.
-    position = position_fill(vjust = 0.5),
-    size = 3
-  )+
+    aes(y = porcentaje / 2, label = paste0(porcentaje, "%")),
+    position = position_dodge(width = 0.9),
+    size = 4.5
+  ) +
   theme_classic() +
   theme(
     plot.tag.position = "bottom",
-    plot.title = element_text(size = 12, face = "bold", hjust = 0.5,vjust=-2), 
-    plot.caption = element_text(size=8, hjust=0),
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5, vjust = -2),
+    plot.caption = element_text(size = 8, hjust = 0),
     axis.text.x = element_text(angle = 45, hjust = 1),
-    
-    legend.background = element_rect(color = "black", linewidth  = 0.5),
-    legend.spacing = unit(0.5, "cm"), 
+    legend.background = element_rect(color = "black", linewidth = 0.5),
+    legend.spacing = unit(0.5, "cm"),
     legend.margin = margin(10, 10, 10, 10)
   )
 
+# Veamos la cantidad de cada uno (+ porcentaje):
+print(datos_humedad_resumen)
+
+
+# Calculamos proporción de humedad promedio por ambiente
+porcentaje_humedad_promedio <- datos_humedad_largo %>%
+  mutate(hay_humedad = as.logical(hay_humedad)) %>%  # <- Conversión TRUE/FALSE
+  group_by(ambiente) %>%
+  summarize(
+    promedio_humedad = mean(hay_humedad, na.rm = TRUE) * 100,
+    .groups = "drop"
+  ) %>%
+  arrange(desc(promedio_humedad))
+
+print(porcentaje_humedad_promedio)
+
+# Calculamos la mediana  de humedad por ambiente
+porcentaje_humedad_mediana <- datos_humedad_largo %>%
+  mutate(hay_humedad = as.logical(hay_humedad)) %>%  # <- Conversión TRUE/FALSE
+  group_by(ambiente) %>%
+  summarize(
+    mediana_humedad = median(hay_humedad, na.rm = TRUE) * 100,
+    .groups = "drop"
+  ) %>%
+  arrange(desc(mediana_humedad))
+
+print(porcentaje_humedad_mediana)
+#Si es 1: >50% humedad.
+#Si es 0: <50% humedad.
 
