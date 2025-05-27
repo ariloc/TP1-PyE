@@ -8,11 +8,6 @@ datos_alquiler <- datos %>%
   filter(!is.na(costo_alquiler)) %>%
   count(costo_alquiler)
 
-#Calculemos el mínimo y máximo:
-min_alquiler <- min(datos$costo_alquiler, na.rm = TRUE)
-max_alquiler <- max(datos$costo_alquiler, na.rm = TRUE)
-
-
 #Calculamos el nro de intervalos (√n)
 bins = ceiling(sqrt(dim(datos_alquiler)[1]))
 
@@ -39,7 +34,10 @@ attach(datos)
 media_alquiler <- mean(datos$costo_alquiler, na.rm = TRUE)
 
 #Calculamos el desvío estándar:
-desvio_estandar_alquiler<-sd(datos$costo_alquiler,na.rm=TRUE)
+desvio_estandar_alquiler <- sd(datos$costo_alquiler,na.rm=TRUE)
+
+#Calculamos el rango de valores del alquiler:
+rango_alquiler <- range(datos$costo_alquiler,na.rm=TRUE)
 
 detach(datos)
 
