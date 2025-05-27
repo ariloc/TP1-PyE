@@ -3,17 +3,20 @@ source(here("datos","leer-datos-lp.R"))
 
 library(tidyverse)
 
+# Categorizar viviendas según condición de propiedad
 datos_limpios <- datos %>%
   mutate(
     propio = case_when(propiedad %in% c("Propio con algún comprobante de tenencia","Propio sin títulos")~"Propia",
                        TRUE ~ "No propia"),
   )
 
+# Seleccionar columnas necesarias para la gráfica
 datos_menores_tenencia <- datos_limpios %>%
   select(
     menores_edad, propio
   )
 
+# Análisis bivariado mediante boxplots comparativos
 ggplot(datos_menores_tenencia) +
   aes(x = propio, y = menores_edad, fill=propio) +
   geom_boxplot(show.legend = F) +
