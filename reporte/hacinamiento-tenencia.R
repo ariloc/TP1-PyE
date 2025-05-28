@@ -3,67 +3,35 @@ source(here("datos","leer-datos-lp.R"))
 
 library(tidyverse)
 
-# Analizamos la frecuencia de la cantidad de personas por habitación, dividiendo la muestra
-# en 2 categorías: "tenencia propia" y "tenencia no propia".
+# Analizamos la frecuencia de la cantidad de personas por dormitorio
 
-#Factorizamos los datos en "Propia" y "No propia", según criterio dado anteriormente [[ VER NOTA]].
-datos_refactorizados<- datos %>%
-  mutate(propiedad_reclasificada=case_when(propiedad %in% c("Propio con algún comprobante de tenencia","Propio sin títulos")~"Propia",
-                                           TRUE ~ "No propia"))
-
-#Factorizamos datos según tipo de tenencia:
-datos_no_propios <- datos_refactorizados %>% 
-  filter(propiedad_reclasificada == "No propia")
-
-datos_propios <- datos_refactorizados %>% 
-  filter(propiedad_reclasificada == "Propia")
-
-# Gráfico de  viviendas no propias
-ggplot(datos_no_propios, aes(x = as.factor(personas_dormitorio))) +
-  geom_bar(fill = "salmon", color = "black",width=0.2) +
+# Gráfico
+ggplot(datos, aes(x = as.factor(personas_dormitorio))) +
+  geom_bar(fill = "salmon", width=0.1) +
   labs(
-    title = "Cantidad de personas por habitación, en viviendas sin tenencia propia",
-    x = "Cantidad de personas por habitación",
-    y = "Frecuencia",
+    title = "Distribución de la máxima cantidad de personas por dormitorio en los barrios relevados",
+    x = "Cantidad de personas por dormitorio",
+    y = "Frecuencia (absoluta)",
     caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa",
   ) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   theme(
     plot.caption = element_text(size=8, hjust=0),
     plot.title = element_text(size = 12, face = "bold", hjust = 0.5,vjust=-2), 
   )+
-  theme_classic()
-
-# Gráfico de viviendas propias
-ggplot(datos_propios, aes(x = as.factor(personas_dormitorio))) +
-  geom_bar(fill = "#00E5EE", color = "black",width=0.2) +
-  labs(
-    title = "Cantidad de personas por habitación, en viviendas con tenencia propia",
-    x = "Cantidad de personas por habitación",
-    y = "Frecuencia",
-    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa",
-  ) + 
-  theme_classic()+
-theme(
-  plot.caption = element_text(size=8, hjust=0),
-  plot.title = element_text(size = 12, face = "bold", hjust = 0.5,vjust=-2), 
-)
-
-
+  theme_classic() +
+  theme(
+    plot.tag.position = "bottom",
+    plot.title = element_text(size = 12, face = "bold", hjust = 0.5, vjust = -2, margin = margin(b = 20)), 
+    plot.caption = element_text(size=8, hjust=0),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 
 # Analizemos las tendencias centrales y dispersión:
+mediana <- median(datos$personas_dormitorio, na.rm = TRUE)
+q1 <- quantile(datos$personas_dormitorio, 0.25, na.rm = TRUE)
+q3 <- quantile(datos$personas_dormitorio, 0.75, na.rm = TRUE)
+RI <- q3 - q1
 
-mediana_no_propia <- median(datos_no_propios$personas_dormitorio, na.rm = TRUE)
-q1_no_propia <- quantile(datos_no_propios$personas_dormitorio, 0.25, na.rm = TRUE)
-q3_no_propia <- quantile(datos_no_propios$personas_dormitorio, 0.75, na.rm = TRUE)
-RI_no_propia <- q3_no_propia - q1_no_propia
-
-mediana_propia <- median(datos_propios$personas_dormitorio, na.rm = TRUE)
-q1_propia <- quantile(datos_propios$personas_dormitorio, 0.25, na.rm = TRUE)
-q3_propia <- quantile(datos_propios$personas_dormitorio, 0.75, na.rm = TRUE)
-RI_propia <- q3_propia - q1_propia
-
-
-cat("Vivienda No propia:"," Mediana:", mediana_no_propia," RI:", RI_no_propia)
-
-cat("Vivienda Propia:"," Mediana:", mediana_propia," RI:", RI_propia)
+cat("Mediana:", mediana," RI:", RI)
 
