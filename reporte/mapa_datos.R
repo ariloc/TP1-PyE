@@ -93,3 +93,75 @@ p1 + geom_point() +
   annotate("rect", xmin = -53, xmax = -57, ymin = -34.25, ymax = -30.75,    # Rectángulo con borde rayado al fragmento con zoom a CABA
            color = "black", fill = NA, linetype = "dashed")
 
+
+### Versiones auxiliares
+
+## Mapa vacío
+
+# Mapa principal
+p1_empty <- ggplot() +
+  geom_sf(data = argentina, aes(), color = "black") +
+  geom_sf(data = malvinas, aes(), color = "black") +
+  #geom_point(data = encuestas_coords, aes(x = longitude, y = latitude), shape=21, fill = "black", stroke=0.5, size=2, color="white") +
+  scale_fill_brewer(palette = "Set3", name = "Región Económica") +
+  theme_void()
+
+# Zoom a CABA
+p2_empty <- ggplot() +
+  geom_sf(data = argentina, aes(), color = "black") +
+  geom_sf(data = malvinas, aes(), color = "black") +
+  #geom_point(data = encuestas_coords, aes(x = longitude, y = latitude), shape=21, fill = "black", stroke=0.5, size=2, color="white") +
+  scale_fill_brewer(palette = "Set3", name = "Región Económica") +
+  coord_sf(xlim = c(-58.6, -58.3), ylim = c(-34.775, -34.5)) + 
+  theme_void() +
+  guides(fill = "none")
+
+
+p1_empty + geom_point() +
+  
+  geom_segment(aes(x = -58.6, y = -34.775, xend = -53, yend = -34.25), color = "black") +   # Líneas al zoom
+  geom_segment(aes(x = -58.6, y = -34.775, xend = -57, yend = -30.75), color = "black") +
+  
+  annotation_custom(        # Fragmento zoom a CABA
+    grob = ggplotGrob(p2_empty),
+    xmin = -53, xmax = -57,
+    ymin = -36, ymax = -29
+  ) + 
+  annotate("rect", xmin = -53, xmax = -57, ymin = -34.25, ymax = -30.75,    # Rectángulo con borde rayado al fragmento con zoom a CABA
+           color = "black", fill = NA, linetype = "dashed")
+
+
+## Mapa sólo barrios (sin regiones económicas)
+
+# Mapa principal
+p1_neigh <- ggplot() +
+  geom_sf(data = argentina, aes(), color = "black") +
+  geom_sf(data = malvinas, aes(), color = "black") +
+  geom_point(data = encuestas_coords, aes(x = longitude, y = latitude), shape=21, fill = "black", stroke=0.5, size=2, color="white") +
+  scale_fill_brewer(palette = "Set3", name = "Región Económica") +
+  theme_void()
+
+# Zoom a CABA
+p2_neigh <- ggplot() +
+  geom_sf(data = argentina, aes(), color = "black") +
+  geom_sf(data = malvinas, aes(), color = "black") +
+  geom_point(data = encuestas_coords, aes(x = longitude, y = latitude), shape=21, fill = "black", stroke=0.5, size=2, color="white") +
+  scale_fill_brewer(palette = "Set3", name = "Región Económica") +
+  coord_sf(xlim = c(-58.6, -58.3), ylim = c(-34.775, -34.5)) + 
+  theme_void() +
+  guides(fill = "none")
+
+
+p1_neigh + geom_point() +
+  
+  geom_segment(aes(x = -58.6, y = -34.775, xend = -53, yend = -34.25), color = "black") +   # Líneas al zoom
+  geom_segment(aes(x = -58.6, y = -34.775, xend = -57, yend = -30.75), color = "black") +
+  
+  annotation_custom(        # Fragmento zoom a CABA
+    grob = ggplotGrob(p2_neigh),
+    xmin = -53, xmax = -57,
+    ymin = -36, ymax = -29
+  ) + 
+  annotate("rect", xmin = -53, xmax = -57, ymin = -34.25, ymax = -30.75,    # Rectángulo con borde rayado al fragmento con zoom a CABA
+           color = "black", fill = NA, linetype = "dashed")
+
