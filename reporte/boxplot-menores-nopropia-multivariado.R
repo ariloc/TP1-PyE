@@ -28,15 +28,15 @@ datos_menores_nopropio <- datos_menores_nopropio %>%
 
 # Análisis multivariado mediante boxplots comparativos
 ggplot(datos_menores_nopropio) +
-  aes(x = propiedad, y = menores_edad, fill=propiedad) +
-  geom_boxplot(show.legend = F) +
+  aes(x = propiedad, y = menores_edad) +
+  geom_boxplot(fill = "orchid3") +
   labs(
     x = "Situación dominial (no propia)",
     y = "Cantidad de menores en el hogar",
     title = "Distribución de cantidad de menores según situación dominial en viviendas con tenencia no propia\npara los barrios relevados",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
-  scale_fill_brewer(palette = "Pastel2") +
+  scale_y_continuous(breaks = seq(0, 10, 1)) +
   theme_classic() +
   theme(
     plot.tag.position = "bottom",

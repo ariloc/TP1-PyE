@@ -18,15 +18,15 @@ datos_jefe_propiedad <- datos_limpios %>%
 
 # Análisis bivariado mediante boxplots comparativos
 ggplot(datos_jefe_propiedad) +
-  aes(x = propio, y = edad_jefe_hogar, fill=propio) +
-  geom_boxplot(show.legend = F) +
+  aes(x = propio, y = edad_jefe_hogar) +
+  geom_boxplot(fill = "indianred2") +
   labs(
     x = "Condición de propiedad", 
     y = "Edad del jefe del hogar",
     title = "Distribución de la edad del jefe del hogar según condición de propiedad en los barrios relevados",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
-  scale_fill_brewer(palette = "Pastel1") +
+  scale_y_continuous(breaks = seq(0, 100, 5)) +
   theme_classic() +
   theme(
     plot.tag.position = "bottom",

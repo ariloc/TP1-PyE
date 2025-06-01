@@ -28,15 +28,14 @@ datos_tiempo_residencia <- datos_tiempo_residencia %>%
 
 # Análisis multivariado mediante boxplots comparativos
 ggplot(datos_tiempo_residencia) +
-  aes(x = propiedad, y = tiempo_residencia, fill=propiedad) +
-  geom_boxplot(show.legend = F) +
+  aes(x = propiedad, y = tiempo_residencia) +
+  geom_boxplot(fill = "darkseagreen3") +
   labs(
     x = "Situación dominial (no propia)",
     y = "Tiempo de residencia (en años)",
     title = "Distribución del tiempo de residencia según situación dominial en viviendas con tenencia no propia\npara los barrios relevados",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
-  scale_fill_brewer(palette = "Pastel2") +
   scale_y_continuous(
     breaks = seq(0, 60, 5),
     minor_breaks = seq(0, 60, 2.5)

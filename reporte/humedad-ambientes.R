@@ -56,8 +56,8 @@ datos_humedad_resumen <- datos_humedad_resumen %>%
 
 # Gráfico
 ggplot(datos_humedad_resumen) +
-  aes(x = reorder(ambiente, porcentaje), y = porcentaje, fill = ambiente) + # Ordenar por frecuencia de mayor a menor con reorder()
-  geom_bar(position = "dodge", stat = "identity", colour = "black") +
+  aes(x = reorder(ambiente, porcentaje), y = porcentaje) + # Ordenar por frecuencia de mayor a menor con reorder()
+  geom_bar(position = "dodge", stat = "identity", colour = "black", fill = "dodgerblue2") +
   scale_y_continuous(labels = scales::percent) +  # Usar etiquetas de porcentaje en la escala
   labs(
     x = "Ambiente de la vivienda",
@@ -78,9 +78,6 @@ ggplot(datos_humedad_resumen) +
     plot.title = element_text(size = 12, face = "bold", hjust = 0.5, vjust = -2),
     plot.caption = element_text(size = 8, hjust = 0),
     axis.text.x = element_text(angle = 45, hjust = 1),
-    legend.background = element_rect(color = "black", linewidth = 0.5),
-    legend.spacing = unit(0.5, "cm"),
-    legend.margin = margin(10, 10, 10, 10)
   )
 
 # Veamos la cantidad de cada uno en un tabla (+ porcentaje):

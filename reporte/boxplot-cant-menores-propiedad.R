@@ -18,15 +18,15 @@ datos_menores_tenencia <- datos_limpios %>%
 
 # Análisis bivariado mediante boxplots comparativos
 ggplot(datos_menores_tenencia) +
-  aes(x = propio, y = menores_edad, fill=propio) +
-  geom_boxplot(show.legend = F) +
+  aes(x = propio, y = menores_edad) +
+  geom_boxplot(fill = "seagreen3") +
   labs(
     x = "Condición de propiedad", 
     y = "Cantidad de menores en el hogar",
     title = "Distribución de cantidad de menores en la vivienda según condición de propiedad\nen los barrios relevados",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
-  scale_fill_brewer(palette = "Pastel1") +
+  scale_y_continuous(breaks = seq(0, 10, 1)) +
   theme_classic() +
   theme(
     plot.tag.position = "bottom",

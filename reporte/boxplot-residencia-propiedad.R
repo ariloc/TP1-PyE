@@ -18,15 +18,14 @@ datos_tiempo_residencia <- datos_limpios %>%
 
 # Análisis bivariado mediante boxplots comparativos
 ggplot(datos_tiempo_residencia) +
-  aes(x = propio, y = tiempo_residencia, fill=propio) +
-  geom_boxplot(show.legend = F) +
+  aes(x = propio, y = tiempo_residencia) +
+  geom_boxplot(fill = "lavender") +
   labs(
     x = "Condición de propiedad",
     y = "Tiempo de residencia (en años)",
     title = "Distribución del tiempo de residencia en la vivienda según condición de propiedad en los barrios relevados",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
-  scale_fill_brewer(palette = "Pastel1") +
   scale_y_continuous(
     breaks = seq(0, 150, 5),
     minor_breaks = seq(0, 150, 2.5)
