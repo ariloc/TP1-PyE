@@ -94,13 +94,18 @@ total_tenencia_propia_tabla_porcentajes<-datos_tenencia_propia %>%
 ##---------------------
 
 # Gráfico de barras: tenencia no propia
-ggplot(datos_tenencia_no_propia, aes(x = fct_reorder(propiedad, n), y = n)) +
+ggplot(datos_tenencia_no_propia, 
+  aes(x = fct_reorder(propiedad, n, 
+                      # .desc=TRUE    # Según si se quiere poner primero lo más o lo menos frecuente
+                     ), 
+      y = n)
+  ) +
   geom_col(fill = "#FF9999", color = "black") +
   geom_text(aes(label = n), hjust = 0.5, size = 4,vjust=4) +  #Etiquetas de cantidad (n) 
   labs(
-    title = "Distribución de tipos de tenencia entre viviendas no propias",
-    x = "Tipo de tenencia",
-    y = "Cantidad de viviendas",
+    title = "Distribución de tipos de tenencia entre viviendas no propias en los barrios relevados",
+    x = "Tipo de tenencia (no propia)",
+    y = "Frecuencia de viviendas",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
   theme_classic() +
@@ -112,13 +117,18 @@ ggplot(datos_tenencia_no_propia, aes(x = fct_reorder(propiedad, n), y = n)) +
   expand_limits(y = max(datos_tenencia_no_propia$n) * 1.1)  # Espacio para que el número no se corte
 
 # Gráfico de barras: tenencia propia
-ggplot(datos_tenencia_propia, aes(x = fct_reorder(propiedad, n), y = n)) +
+ggplot(datos_tenencia_propia, 
+  aes(x = fct_reorder(propiedad, n,
+                      # .desc=TRUE   # Según si se quiere poner primero lo más o lo menos frecuente
+                     ), 
+           y = n)
+  ) +
   geom_col(fill = "#ad5e9d", color = "black") +
-  geom_text(aes(label = n), hjust = 0.5, size = 4,vjust=5) +  
+  geom_text(aes(label = n), hjust = 0.5, size = 4, vjust=5) +  
   labs(
-    title = "Distribución de tipos de tenencia entre viviendas propias",
-    x = "Tipo de tenencia",
-    y = "Cantidad de viviendas",
+    title = "Distribución de tipos de tenencia entre viviendas propias en los barrios relevados",
+    x = "Tipo de tenencia (propia)",
+    y = "Frecuencia de viviendas",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
   theme_classic() +
