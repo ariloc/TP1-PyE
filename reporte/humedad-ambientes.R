@@ -54,7 +54,7 @@ datos_humedad_grafico <- datos_humedad_porc %>%
   mutate(ambiente = 
            factor(ambiente, 
                   levels = c("cocina","dormitorio","baño","living","otro","ninguna"),
-                  labels = c("Cocina","Dormitorio","Baño","Living","Otro","Sin humedad")
+                  labels = c("Cocina","Dormitorio","Baño","Living","Otro","Ninguno")
            )
   )
 
@@ -65,15 +65,16 @@ grafico <- ggplot(datos_humedad_grafico) +
   scale_y_continuous(labels = scales::percent) +  # Usar etiquetas de porcentaje en la escala
   labs(
     x = "Ambiente de la vivienda",
-    y = "Porcentaje de viviendas con humedad",
-    fill = "Ambientes con humedad",
+    y = "Porcentaje de viviendas que presentan humedad en el ambiente",
     title = "Distribución de ambientes con problemas de humedad en las viviendas\nde los barrios relevados",
     caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
   geom_text(
     aes(y = porcentaje / 2, label = paste0(porcentaje * 100, "%")),
     position = position_dodge(width = 0.9),
-    size = 4.5
+    size = 4.5,
+    color = "white",
+    fontface = "bold"
   ) +
   coord_flip() +
   theme_classic() +
