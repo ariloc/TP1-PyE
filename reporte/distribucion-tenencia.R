@@ -94,7 +94,7 @@ total_tenencia_propia_tabla_porcentajes<-datos_tenencia_propia %>%
 ##---------------------
 
 # Gráfico de barras: tenencia no propia
-ggplot(datos_tenencia_no_propia, 
+grafico_no_propia <- ggplot(datos_tenencia_no_propia, 
   aes(x = fct_reorder(propiedad, n, 
                       # .desc=TRUE    # Según si se quiere poner primero lo más o lo menos frecuente
                      ), 
@@ -115,9 +115,10 @@ ggplot(datos_tenencia_no_propia,
     plot.caption = element_text(size = 8, hjust = 0)
   ) +
   expand_limits(y = max(datos_tenencia_no_propia$n) * 1.1)  # Espacio para que el número no se corte
+grafico_no_propia
 
 # Gráfico de barras: tenencia propia
-ggplot(datos_tenencia_propia, 
+grafico_propia <- ggplot(datos_tenencia_propia, 
   aes(x = fct_reorder(propiedad, n,
                       # .desc=TRUE   # Según si se quiere poner primero lo más o lo menos frecuente
                      ), 
@@ -138,4 +139,19 @@ ggplot(datos_tenencia_propia,
     plot.caption = element_text(size = 8, hjust = 0)
   ) +
   expand_limits(y = max(datos_tenencia_propia$n) * 1.1) 
+grafico_propia
 
+
+## Marcar ciertas regiones en los gráficos
+
+# Sin títulos (propia)
+grafico_propia_st <- grafico_propia +
+  annotate("rect", xmin = 0.5, xmax = 1.5, ymin = -Inf, ymax = Inf,
+           alpha = 0.2, fill = "#87CEEB")
+grafico_propia_st
+
+# Alquilado (no propia)
+grafico_no_propia_alq <- grafico_no_propia +
+  annotate("rect", xmin = 0.5, xmax = 1.5, ymin = -Inf, ymax = Inf,
+           alpha = 0.2, fill = "#FFD700")
+grafico_no_propia_alq
