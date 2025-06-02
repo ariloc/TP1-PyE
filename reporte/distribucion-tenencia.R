@@ -37,7 +37,7 @@ ggplot(datos_grafico_tenencia, aes(x = 3 , y = valor, fill = fct_inorder(grupo))
   guides(fill = guide_legend(title = "Tipo de tenencia de la vivienda")) + #Leyenda
   labs(  #Título y nota
     title = "Distribución de los hogares según tipo de tenencia de la vivienda\nen los barrios relevados",
-    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa"
+    caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
   #Estilo del gráfico
   theme_void()+
