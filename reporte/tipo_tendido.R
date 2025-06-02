@@ -41,7 +41,7 @@ ggplot(datos_grafico, aes(x = 3 , y = porc, fill = fct_inorder(grupo))) +
   guides(fill = guide_legend(title = "Tipo de tendido eléctrico dentro de la vivienda")) + 
   labs(  
     title = "Distribución de los hogares según calidad del tendido eléctrico\nen los barrios relevados",
-    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa"
+    caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
   theme_void()+
   theme(
@@ -51,5 +51,7 @@ ggplot(datos_grafico, aes(x = 3 , y = porc, fill = fct_inorder(grupo))) +
     
     legend.background = element_rect(color = "black", linewidth  = 0.5),
     legend.spacing = unit(0.5, "cm"),
-    legend.margin = margin(10, 10, 10, 10)
+    legend.margin = margin(10, 10, 10, 10),
+    # legend.position = "right",   # Posicionamiento de la leyenda (opcional)
+    # legend.justification = c(0,.95),
   )
