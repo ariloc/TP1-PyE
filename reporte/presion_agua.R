@@ -21,7 +21,7 @@ datos_grafico <- datos_presion_res %>%
 
 grafico <- ggplot(datos_grafico) + 
   aes(
-    x = reorder(presion_agua, presion_agua, function(x) length(x)), # Categorías ordenadas según orden natural de la variable arriba a abajo (presión)
+    x = reorder(presion_agua, -as.numeric(presion_agua)), # Categorías ordenadas según orden natural de la variable arriba a abajo (presión)
     y = porcentaje
   ) + 
   scale_y_continuous(labels = scales::percent) +    # Eje para porcentajes
@@ -73,3 +73,4 @@ grafico_md <- grafico +
   annotate("rect", xmin = 2.5, xmax = 3.5, ymin = -Inf, ymax = Inf,
            alpha = 0.2, fill = "#FFD700")
 grafico_md
+
