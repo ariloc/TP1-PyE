@@ -37,12 +37,12 @@ cat("Mediana:", mediana," RI:", RI)
 # q2 (50%)
 bastones_q2 <- bastones +
   annotate("rect", xmin = 0.75, xmax = 2.25, ymin = -Inf, ymax = Inf,
-                      alpha = 0.2, fill = "#FF6347") # Color "tomato"
+                      alpha = 0.2, fill = "#FF6347")
 bastones_q2
 
-# q2 + q3
-bastones_q2_q3 <- bastones_q2 +
+# q3
+bastones_q3 <- bastones +
   annotate("rect", xmin = 0.75, xmax = 3.25, ymin = -Inf, ymax = Inf,
-           alpha = 0.2, fill = "#FFD700") # Color "gold"
-bastones_q2_q3
+           alpha = 0.2, fill = "#87CEEB")
+bastones_q3
 

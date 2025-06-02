@@ -93,3 +93,17 @@ print(
   mutate(porcentaje = porcentaje*100)
 )
 
+
+## Marcar ciertas regiones en el gráfico
+
+# Ningún ambiente con humedad
+grafico_nh <- grafico +
+  annotate("rect", xmin = 5.46, xmax = 6.55, ymin = -Inf, ymax = Inf,
+           alpha = 0.2, fill = "#FF6347")
+grafico_nh
+
+# Dormitorio
+grafico_dorm <- grafico +
+  annotate("rect", xmin = 4.46, xmax = 5.55, ymin = -Inf, ymax = Inf,
+           alpha = 0.2, fill = "#FFD700")
+grafico_dorm
