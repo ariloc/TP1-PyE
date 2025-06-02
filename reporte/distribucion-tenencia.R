@@ -28,6 +28,7 @@ ggplot(datos_grafico_tenencia, aes(x = 3 , y = valor, fill = fct_inorder(grupo))
   geom_col(width = 1, color = "brown") + # Ponemos las barras como columnas, para simular porciones del sector circular.
   coord_polar(theta = "y") +   # Lo convertimos en un grafico de torta.
   scale_fill_brewer(palette = "Pastel1") +  #color del gráfico
+  # scale_fill_manual(values = c("indianred2", "darkslategray3")) +  # colores a mano (opcional)
   xlim(c(0.5,4)) + #Hace el efecto "Donut"
   geom_label_repel( #Para poner las etiquetas por fuera.
     aes(y = pos, label = paste0(valor, "%")),  # Evitamos superposición de etiquetas , las agregamos como flechas.
@@ -48,7 +49,9 @@ ggplot(datos_grafico_tenencia, aes(x = 3 , y = valor, fill = fct_inorder(grupo))
     
     legend.background = element_rect(color = "black", linewidth  = 0.5),  # Borde de fondo de la leyenda
     legend.spacing = unit(0.5, "cm"),  # Espacio entre los elementos de la leyenda
-    legend.margin = margin(10, 10, 10, 10)  # Espacio entre el borde de la leyenda y los elementos
+    legend.margin = margin(10, 10, 10, 10),  # Espacio entre el borde de la leyenda y los elementos
+    # legend.position = "right", # Posicionamiento de la leyenda (opcional)
+    # legend.justification = c(0,.9)
   )
 
 #------------------------------
