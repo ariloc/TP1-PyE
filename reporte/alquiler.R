@@ -15,10 +15,10 @@ bins = ceiling(sqrt(dim(datos_alquiler)[1]))
 ggplot(datos_alquiler, aes(x = costo_alquiler)) +
   geom_histogram(bins = bins, fill = "indianred2", color = "black") +
   labs(
-    title = "Distribución del costo del alquiler en los barrios populares relevados",
-    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa",
+    title = "Distribución del costo del alquiler en los barrios relevados",
+    caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa",
     x = "Costo del alquiler en pesos",
-    y = "Cantidad de viviendas",
+    y = "Frecuencia de viviendas",
   ) +
   theme_classic() + 
   theme(
@@ -28,7 +28,6 @@ ggplot(datos_alquiler, aes(x = costo_alquiler)) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
-attach(datos)
 
 #Calculamos la media aritmética del coste del alquiler:
 media_alquiler <- mean(datos$costo_alquiler, na.rm = TRUE)
@@ -38,6 +37,4 @@ desvio_estandar_alquiler <- sd(datos$costo_alquiler,na.rm=TRUE)
 
 #Calculamos el rango de valores del alquiler:
 rango_alquiler <- range(datos$costo_alquiler,na.rm=TRUE)
-
-detach(datos)
 
