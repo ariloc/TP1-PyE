@@ -35,3 +35,21 @@ ggplot(datos_menores_tenencia) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
+# Resumen estadístico de la relación entre cantidad de menores y condición de propiedad.
+datos_menores_tenencia %>%
+  group_by(propio) %>%
+  summarise(
+    cantidad = n(),
+    media = mean(menores_edad, na.rm = TRUE),
+    min = min(menores_edad, na.rm = TRUE),
+    Q1 = quantile(menores_edad, 0.25, na.rm = TRUE),
+    mediana = median(menores_edad, na.rm = TRUE),
+    Q3 = quantile(menores_edad, 0.75, na.rm = TRUE),
+    max = max(menores_edad, na.rm = TRUE),
+    RI = Q3-Q1,
+    `Desvío estándar` = sd(menores_edad, na.rm = TRUE)
+  )
+
+
+
+

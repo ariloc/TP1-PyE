@@ -44,3 +44,20 @@ ggplot(datos_menores_nopropio) +
     plot.caption = element_text(size=8, hjust=0),
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+
+
+# Resumen estadístico de la cantidad de menores en el hogar.
+datos_menores_nopropio %>%
+  group_by(propiedad) %>%
+  summarise(
+    cantidad= n(),
+    media = mean(menores_edad, na.rm = TRUE),
+    min = min(menores_edad, na.rm = TRUE),
+    Q1 = quantile(menores_edad, 0.25, na.rm = TRUE),
+    mediana = median(menores_edad, na.rm = TRUE),
+    Q3 = quantile(menores_edad, 0.75, na.rm = TRUE),
+    max = max(menores_edad, na.rm = TRUE),
+    RI = Q3-Q1,
+    `Desvío estándar` = sd(menores_edad, na.rm = TRUE),
+    
+  )

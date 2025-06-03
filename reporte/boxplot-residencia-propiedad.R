@@ -40,3 +40,18 @@ ggplot(datos_tiempo_residencia) +
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 
+
+# Resumen estadístico del tiempo de residencia según la condición de propiedad,.
+datos_tiempo_residencia %>% 
+  group_by(propio) %>% 
+  summarise(
+    cantidad = n(),
+    media = mean(tiempo_residencia, na.rm = TRUE),
+    min = min(tiempo_residencia, na.rm = TRUE),
+    Q1 = quantile(tiempo_residencia, 0.25, na.rm = TRUE),
+    mediana = median(tiempo_residencia, na.rm = TRUE),
+    Q3 = quantile(tiempo_residencia, 0.75, na.rm = TRUE),
+    max = max(tiempo_residencia, na.rm = TRUE),
+    RI = Q3 - Q1,
+    `Desvío estándar` = sd(tiempo_residencia, na.rm = TRUE)
+  )
