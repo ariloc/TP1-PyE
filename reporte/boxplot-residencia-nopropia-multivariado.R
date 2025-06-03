@@ -27,7 +27,7 @@ datos_tiempo_residencia <- datos_tiempo_residencia %>%
   )
 
 # Análisis multivariado mediante boxplots comparativos
-ggplot(datos_tiempo_residencia) +
+grafico <- ggplot(datos_tiempo_residencia) +
   aes(x = propiedad, y = tiempo_residencia) +
   geom_boxplot(fill = "darkseagreen3") +
   labs(
@@ -49,9 +49,10 @@ ggplot(datos_tiempo_residencia) +
     plot.caption = element_text(size=8, hjust=0),
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+grafico
 
 # Resumen estadístico del tiempo de residencia según la condición dominial en viviendas con tenencia no propia.
-datos_tiempo_residencia %>% 
+datos_tiempo_res_resumen <- datos_tiempo_residencia %>% 
   group_by(propiedad) %>% 
   summarise(
     cantidad = n(),
@@ -65,3 +66,16 @@ datos_tiempo_residencia %>%
     `Desvío estándar` = sd(tiempo_residencia, na.rm = TRUE)
   )
 
+## Marcar ciertas regiones en el gráfico
+# Alquilado q3
+resumen_alquilado <- datos_tiempo_res_resumen[datos_tiempo_res_resumen$propiedad == "Alquilado",]
+grafico_alq_q3 <- grafico +
+  annotate("rect", xmin = 0.55, xmax = 1.45, ymin = as.numeric(resumen_alquilado[,"min"]), ymax = as.numeric(resumen_alquilado[,"Q3"]) + 0.5,
+           alpha = 0.2, fill = "#FF6347")
+grafico_alq_q3
+
+# Alquilado q3 + mediana resto
+dat <- ggplot_build(grafico)$data[[1]]
+grafico_alq_q3_med <- grafico_alq_q3 +
+  geom_segment(data = dat, aes(x = xmin, xend = xmax, y = middle, yend = middle), colour = c("transparent", "blue", "blue", "blue"), size = 1)
+grafico_alq_q3_med
