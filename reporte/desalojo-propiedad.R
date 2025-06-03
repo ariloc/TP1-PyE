@@ -25,10 +25,10 @@ datos_desalojo_propiedad %>%
   geom_bar(position="dodge", stat="identity", colour="black") +
   scale_fill_manual(values = c("Sí" = "palegreen", "No" = "lightcoral")) +
   labs(x = "Condición de propiedad", 
-       y = "Porcentaje", 
+       y = "Porcentaje de viviendas", 
        fill = "Tuvo al menos un intento de desalojo",
        title = "Distribución de viviendas con al menos un intento de desalojo\nsegún condición de propiedad en los barrios relevados",
-       caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa"
+       caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa"
   ) +
   geom_text(aes(y = datos_desalojo_propiedad$porcentaje / 2, label = paste0(datos_desalojo_propiedad$porcentaje, "%"),), position = position_dodge(width = 0.9), size = 4.5) + 
   theme_classic() +
