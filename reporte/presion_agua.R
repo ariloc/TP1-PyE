@@ -42,7 +42,7 @@ grafico <- ggplot(datos_grafico) +
     title = "Distribución de la calidad de presión de agua declarada en los barrios relevados",
     x = "Calidad de presión del agua", 
     y = "Porcentaje de viviendas",
-    caption = "Fuente: Relevamiento de Condiciones Habitacionles 2022, La Poderosa",
+    caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa",
   ) + # Nombres de ejes
   
   coord_flip() +
