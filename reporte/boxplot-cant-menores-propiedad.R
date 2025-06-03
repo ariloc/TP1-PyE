@@ -17,7 +17,7 @@ datos_menores_tenencia <- datos_limpios %>%
   )
 
 # Análisis bivariado mediante boxplots comparativos
-ggplot(datos_menores_tenencia) +
+grafico <- ggplot(datos_menores_tenencia) +
   aes(x = propio, y = menores_edad) +
   geom_boxplot(fill = "seagreen3") +
   labs(
@@ -34,6 +34,7 @@ ggplot(datos_menores_tenencia) +
     plot.caption = element_text(size=8, hjust=0),
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+grafico
 
 # Resumen estadístico de la relación entre cantidad de menores y condición de propiedad.
 datos_menores_tenencia %>%
@@ -50,6 +51,19 @@ datos_menores_tenencia %>%
     `Desvío estándar` = sd(menores_edad, na.rm = TRUE)
   )
 
+# Contar cantidad sin menores
+datos_menores_tenencia %>%
+  group_by(propio) %>%
+  summarise(
+    cantidad = n(),
+    sin_menores = sum(menores_edad == 0),
+    porcentaje_sm = sin_menores / cantidad
+  )
 
-
+## Marcar ciertas regiones en la gráfica
+# Mediana
+dat <- ggplot_build(grafico)$data[[1]]
+grafico_med <- grafico +
+  geom_segment(data = dat, aes(x = xmin, xend = xmax, y = middle, yend = middle), colour = "yellow", size = 1)
+grafico_med
 
