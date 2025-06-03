@@ -6,7 +6,7 @@ library(ggplot2)
 ggplot(datos) +
   aes(x = edad_jefe_hogar, y = tiempo_residencia) +
   geom_jitter(width = 0.3, height = 0.3, alpha = 0.75, color = "#252850", size = 2) +
-  #geom_smooth(method = "lm", se = TRUE, color = "darkred", fill = "red", alpha = 0.1) +
+  #geom_smooth(method = "loess", se = TRUE, color = "darkred", fill = "red", alpha = 0.1) + #LM: recta de correlación lineal, LOESS: tendencia no lineal.
   labs(x = "Edad del jefe/a del hogar (años)", 
        y = "Tiempo de residencia (años)",
        caption = "Fuente: Relevamiento de Condiciones Habitacionales 2022, La Poderosa",
