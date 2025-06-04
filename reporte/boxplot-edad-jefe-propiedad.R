@@ -51,10 +51,6 @@ datos_jefe_resumen <- datos_jefe_propiedad %>%
     `Desvío estándar` = sd(edad_jefe_hogar, na.rm = TRUE)
   )
 
-# Contar menores en no propias
-datos_jefe_propiedad %>%
- filter(propio == "No propia" & edad_jefe_hogar < 18)
-
 ## Marcar ciertas regiones en la gráfica
 # Mediana
 dat <- ggplot_build(grafico)$data[[1]]
